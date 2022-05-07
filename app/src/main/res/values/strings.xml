@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Quan Ly Thu Chi</string>
+    <string name="lbl_revenue">Revenue</string>
+    <string name="lbl_expenses">Expenses</string>
+    <string name="lbl_statistical">Statistical</string>
+
+    <string name="lbl_category">Danh Mục:</string>
+    <string name="lbl_date">Ngày:</string>
+    <string name="lbl_enter_infomation">enter information</string>
+    <string name="lbl_price">Số tiền:</string>
+    <string name="lbl_vnd">VND</string>
+    <string name="lbl_note">Ghi chú:</string>
+
+    <string name="lbl_save">Lưu</string>
+    <string name="lbl_cancel">Huỷ</string>
+
+    <string name="lbl_not_null_data">Vui lòng không để trông dữ liệu</string>
+    <string name="lbl_under">Quay lại</string>
+
+<!--  nội dung  slide introduce-->
+    <string name="lbl_title_here">Tiêu đề ở đây</string>
+    <string name="lbl_description_here">Mô tả ở đây</string>
+    <string name="lbl_title_fragmnet_slide_2">Tiêu đề ở đây \n Tiêu đề ở đây</string>
+    <string name="lbl_description_fragment_slide_2">Mô tả ở đây \nMô tả ở đây</string>
+    <string name="lbl_fragment_slide_3_1">Chào mừng bạn đến với ứng dụng của chúng tôi</string>
+    <string name="lbl_fragment_slide_3_2">Mô tả</string>
+    <string name="lbl_fragment_slide_3_3">Nội dung mô tả</string>
+    <string name="lbl_fragment_slide_3_4">Bắt Đầu</string>
+    <string name="lbl_fragment_slide_3_5">Các điều khoản và điều kiện</string>
+
+</resources>
