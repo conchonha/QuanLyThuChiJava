@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.baseprojectandroid.R;
 import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 import com.example.baseprojectandroid.models.spinner_model.SpinnerModel;
 import com.example.baseprojectandroid.src.repositories.revenue_expenditure_repositories.RevenueExpenditureRepositories;
@@ -37,8 +38,11 @@ public class RevenueExpenditureViewmodel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<SpinnerModel>> getListSpinner(){
-        return mRevenueExpenditureRepositories.getListSpiner();
+    public LiveData<List<SpinnerModel>> getListSpinner(String type){
+        if(type.equals("Revenue")){
+            return mRevenueExpenditureRepositories.getListSpiner();
+        }
+        return mRevenueExpenditureRepositories.getListSpinerType2();
     }
 
     public void insertEvenueExpenditure(RevenueExpenditureTable revenueExpenditureTable){
@@ -62,7 +66,6 @@ public class RevenueExpenditureViewmodel extends AndroidViewModel {
     }
 
 
-    //getter and setter
     public String getmMounth() {
         return mMounth;
     }
@@ -109,7 +112,6 @@ public class RevenueExpenditureViewmodel extends AndroidViewModel {
         return this.mListAllRevenueExpenditureTable;
     }
 
-    //get index spinner
     public int getIndexSpinner(String content){
         int index = 0;
         if(mListSpinner != null){
@@ -123,17 +125,14 @@ public class RevenueExpenditureViewmodel extends AndroidViewModel {
     }
 
 
-    //get list spinner mounth
     public LiveData<List<String>>getListMounthSpinner(){
         return mRevenueExpenditureRepositories.getListMounth();
     }
 
-    //get list spinner year
     public LiveData<List<String>>getListYearthSpinner(){
         return mRevenueExpenditureRepositories.getListYear();
     }
 
-    //get total all revenue expenditure
     public Map<String,String>getTotalAllStatistical(){
         int totalRevenue = 0;
         int totalExpenditure = 0;
@@ -154,7 +153,6 @@ public class RevenueExpenditureViewmodel extends AndroidViewModel {
         return map;
     }
 
-    //get total mounth + year revenue expenditure
     public Map<String,String>getTotalMounthYearStatistical(){
         int totalRevenue = 0;
         int totalExpenditure = 0;
@@ -180,7 +178,6 @@ public class RevenueExpenditureViewmodel extends AndroidViewModel {
         map.put(Constain.totalSymmetrical,totalSymmetrical+"");
         return map;
     }
-    //get total year revenue expenditure
     public Map<String,String>getTotalYearStatistical(){
         int totalRevenue = 0;
         int totalExpenditure = 0;

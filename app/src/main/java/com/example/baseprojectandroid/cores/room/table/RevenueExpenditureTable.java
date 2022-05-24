@@ -22,9 +22,6 @@ public class RevenueExpenditureTable extends BaseObject {
     @ColumnInfo(name = "content")
     public String mContent;
 
-    /*
-     * Constructer
-     */
 
     public RevenueExpenditureTable() {
 
@@ -38,10 +35,6 @@ public class RevenueExpenditureTable extends BaseObject {
         this.mPrice = price;
         this.mContent = content;
     }
-
-    /*
-     * Getters and Setters
-     */
 
     public String getmImage() {
         return mImage;

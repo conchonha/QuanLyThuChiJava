@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.baseprojectandroid.R;
 import com.example.baseprojectandroid.compoments.ItemTouchHelperSimpleCallback;
 import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
-import com.example.baseprojectandroid.models.callback.CallbackToRevenueExpenditure;
 import com.example.baseprojectandroid.src.adapter.revenue_expenditure_adapter.RevenueExpenditureAdapter;
 import com.example.baseprojectandroid.src.dialog.FragmentDialogRevenueExpenditure;
 import com.example.baseprojectandroid.src.viewmodel.revenue_expenditure_viewmodel.RevenueExpenditureViewmodel;
@@ -31,7 +30,6 @@ public class FragmentRevenue extends Fragment {
     private FloatingActionButton mFabRevenue;
     private RecyclerView mRecyclerViewRevenue;
 
-    //variable
     private FragmentDialogRevenueExpenditure mFragmentDialogAddRevenueExpenditure;
     private RevenueExpenditureViewmodel mRevenueExpenditureViewmodel;
     private RevenueExpenditureAdapter mAdapter;
@@ -48,21 +46,17 @@ public class FragmentRevenue extends Fragment {
     }
 
     private void init() {
-        //khởi tạo recyclerview
         mRecyclerViewRevenue.setHasFixedSize(true);
         mRecyclerViewRevenue.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
-        //set adapter
         mAdapter = new RevenueExpenditureAdapter(getFragmentManager());
         new ItemTouchHelper(ItemTouchHelperSimpleCallback.simpleCallBack(FragmentRevenue.this, getString(R.string.lbl_revenue), mRevenueExpenditureViewmodel, getActivity(), mRecyclerViewRevenue)).attachToRecyclerView(mRecyclerViewRevenue);
         mRecyclerViewRevenue.setAdapter(mAdapter);
     }
 
-    //khởi tạo viewmodel
     private void intViewModel() {
         mRevenueExpenditureViewmodel = ViewModelProviders.of(getActivity()).get(RevenueExpenditureViewmodel.class);
 
-        //quan sát và lắng nghe sự thay đổi của dữ liệu
         mRevenueExpenditureViewmodel.getListRevenueExpenditure(getString(R.string.lbl_revenue)).observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
             @Override
             public void onChanged(final List<RevenueExpenditureTable> revenueExpenditureTables) {
@@ -74,25 +68,26 @@ public class FragmentRevenue extends Fragment {
 
     }
 
-    //lắng nghe sự kiện onclick view
     private void listenerOnclickedView() {
         mFabRevenue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFragmentDialogAddRevenueExpenditure = new FragmentDialogRevenueExpenditure();
-                CallbackToRevenueExpenditure callbackToRevenueExpenditure = mFragmentDialogAddRevenueExpenditure;
-                callbackToRevenueExpenditure.getTitleDialog(getString(R.string.lbl_revenue));
-                mFragmentDialogAddRevenueExpenditure.setCancelable(false);
-                mFragmentDialogAddRevenueExpenditure.show(getFragmentManager(), Constain.fragmentDialogRevenueExpenditure);
+                FragmentDialogRevenueExpenditure.getInstance()
+                        .getTitleDialog(getString(R.string.lbl_revenue))
+                        .setTitleCategory(R.string.lbl_category)
+                        .setTitleDate(R.string.lbl_date)
+                        .setTitlePrice(R.string.lbl_price)
+                        .setTitleNote(R.string.lbl_note)
+                        .setTitleSave(R.string.lbl_save)
+                        .setTitleCancel(R.string.lbl_cancel)
+                        .showFragment(getFragmentManager(), Constain.fragmentDialogRevenueExpenditure);
             }
         });
     }
 
-    //ánh xạ view
     private void initView() {
         mFabRevenue = mView.findViewById(R.id.fab_revenue);
         mRecyclerViewRevenue = mView.findViewById(R.id.recyclerview_revenue);
     }
 
-    //Swipe to Delete RecyclerView Items
 }

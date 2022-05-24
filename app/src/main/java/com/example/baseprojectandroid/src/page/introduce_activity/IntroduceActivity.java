@@ -11,7 +11,6 @@ import com.example.baseprojectandroid.src.adapter.introduce_adapter.IntroduceAda
 public class IntroduceActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
-    //variable
     private IntroduceAdapter mIntroduceAdapter;
 
     @Override

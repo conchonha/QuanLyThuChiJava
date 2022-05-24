@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baseprojectandroid.R;
 import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
-import com.example.baseprojectandroid.models.callback.CallbackToRevenueExpenditure;
 import com.example.baseprojectandroid.src.dialog.FragmentDialogRevenueExpenditure;
 import com.example.baseprojectandroid.utils.Constain;
 import com.squareup.picasso.Picasso;
@@ -22,10 +21,9 @@ import java.util.List;
 public class RevenueExpenditureAdapter extends RecyclerView.Adapter<RevenueExpenditureAdapter.EvenueExpenditureViewhodler> {
     private List<RevenueExpenditureTable> mListRevenueExpenditureTable = new ArrayList<>();
     private View mView;
-    private FragmentDialogRevenueExpenditure mFragmentDialogRevenueExpenditure;
     private FragmentManager mFragmentManager;
 
-    public RevenueExpenditureAdapter(FragmentManager fragmentManager){
+    public RevenueExpenditureAdapter(FragmentManager fragmentManager) {
         this.mFragmentManager = fragmentManager;
     }
 
@@ -47,11 +45,15 @@ public class RevenueExpenditureAdapter extends RecyclerView.Adapter<RevenueExpen
         holder.mImgPend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFragmentDialogRevenueExpenditure =new FragmentDialogRevenueExpenditure();
-                mFragmentDialogRevenueExpenditure.setCancelable(false);
-                CallbackToRevenueExpenditure callback = mFragmentDialogRevenueExpenditure;
-                callback.getRevenueExpenditureObject(revenueExpenditureTable);
-                mFragmentDialogRevenueExpenditure.show(mFragmentManager, Constain.fragmentDialogRevenueExpenditure);
+                FragmentDialogRevenueExpenditure.getInstance()
+                        .getRevenueExpenditureObject(revenueExpenditureTable)
+                        .setTitleCategory(R.string.lbl_category)
+                        .setTitleDate(R.string.lbl_date)
+                        .setTitlePrice(R.string.lbl_price)
+                        .setTitleNote(R.string.lbl_note)
+                        .setTitleSave(R.string.lbl_save)
+                        .setTitleCancel(R.string.lbl_cancel)
+                        .showFragment(mFragmentManager, Constain.fragmentDialogRevenueExpenditure);
             }
         });
     }

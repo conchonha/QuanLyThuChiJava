@@ -9,7 +9,6 @@ import com.example.baseprojectandroid.R;
 import com.example.baseprojectandroid.src.page.introduce_activity.IntroduceActivity;
 
 public class splash_activity extends AppCompatActivity {
-    //variable
     private Handler mHandler;
     private Runnable mRunable;
 
