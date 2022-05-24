@@ -31,6 +31,7 @@ public class FragmentExpenses extends Fragment {
     private RecyclerView mRecyclerViewExpenses;
     private FloatingActionButton mFabExpenses;
 
+    //variable
     private RevenueExpenditureAdapter mAdapter;
     private RevenueExpenditureViewmodel mRevenueExpenditureViewmodel;
     private String TAG = "FragmentExpenses";
@@ -46,24 +47,29 @@ public class FragmentExpenses extends Fragment {
         return mView;
     }
 
+    // ánh xạ view
     private void initView() {
         mRecyclerViewExpenses = mView.findViewById(R.id.recyclerview_expenses);
         mFabExpenses = mView.findViewById(R.id.fab_expenses);
     }
 
     private void init() {
+        //khởi tạo recyclerview
         mRecyclerViewExpenses.setHasFixedSize(true);
         mRecyclerViewExpenses.setLayoutManager(new GridLayoutManager(mView.getContext(), 1));
 
+        //khởi tạo adapter
         mAdapter = new RevenueExpenditureAdapter(getFragmentManager());
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(ItemTouchHelperSimpleCallback.simpleCallBack(FragmentExpenses.this,getString(R.string.lbl_expenses),mRevenueExpenditureViewmodel,getActivity(),mRecyclerViewExpenses));
         itemTouchHelper.attachToRecyclerView(mRecyclerViewExpenses);
         mRecyclerViewExpenses.setAdapter(mAdapter);
     }
 
+    //khởi tạo viewmodel
     private void intViewModel() {
         mRevenueExpenditureViewmodel = ViewModelProviders.of(getActivity()).get(RevenueExpenditureViewmodel.class);
 
+        //quan sát và lắng nghe sự thay đổi của dữ liệu
         mRevenueExpenditureViewmodel.getListRevenueExpenditure(getString(R.string.lbl_expenses)).observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
             @Override
             public void onChanged(List<RevenueExpenditureTable> revenueExpenditureTables) {
@@ -75,6 +81,7 @@ public class FragmentExpenses extends Fragment {
 
     }
 
+    //lắng nghe sự kiện onclick view
     private void listenerOnclickedView() {
         mFabExpenses.setOnClickListener(new View.OnClickListener() {
             @Override

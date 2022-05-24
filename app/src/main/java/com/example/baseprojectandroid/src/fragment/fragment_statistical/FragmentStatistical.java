@@ -37,6 +37,7 @@ public class FragmentStatistical extends Fragment{
     private Spinner mSpinnerMounth,mSpinneryear;
     private RelativeLayout mRelativeLayoutStatistical;
     private LinearLayout mLinearLayoutMounth;
+    //variable
 
     private RevenueExpenditureViewmodel mRevenueExpenditureViewmodel;
 
@@ -55,13 +56,16 @@ public class FragmentStatistical extends Fragment{
         mSpinnerMounth.setAdapter(new ArrayAdapter<String>(mView.getContext(),android.R.layout.simple_spinner_item,mRevenueExpenditureViewmodel.getListMounthSpinner().getValue()));
         mSpinneryear.setAdapter(new ArrayAdapter<String>(mView.getContext(),android.R.layout.simple_spinner_item,mRevenueExpenditureViewmodel.getListYearthSpinner().getValue()));
 
+        //set all toal
         Map<String,String> map = mRevenueExpenditureViewmodel.getTotalAllStatistical();
         setTextView(map.get(Constain.totalRevenue),map.get(Constain.totalExpenditure),map.get(Constain.totalSymmetrical));
     }
 
+    //khởi tạo viewmodel
     private void initViewModel() {
         mRevenueExpenditureViewmodel = ViewModelProviders.of(getActivity()).get(RevenueExpenditureViewmodel.class);
 
+        //lắng nghe và quan sát sự thay đổi dữ liệu
         mRevenueExpenditureViewmodel.getAllListRevenueExpenditure().observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
             @Override
             public void onChanged(List<RevenueExpenditureTable> list) {
@@ -111,6 +115,7 @@ public class FragmentStatistical extends Fragment{
         });
     }
 
+    //ánh xạ view
     private void initView() {
         mTxtTotalRevenue = mView.findViewById(R.id.txt_total_revenue);
         mTxtTotalExpendises = mView.findViewById(R.id.txt_total_expenses);

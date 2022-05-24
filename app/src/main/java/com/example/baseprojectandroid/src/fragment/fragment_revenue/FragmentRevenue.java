@@ -30,6 +30,7 @@ public class FragmentRevenue extends Fragment {
     private FloatingActionButton mFabRevenue;
     private RecyclerView mRecyclerViewRevenue;
 
+    //variable
     private FragmentDialogRevenueExpenditure mFragmentDialogAddRevenueExpenditure;
     private RevenueExpenditureViewmodel mRevenueExpenditureViewmodel;
     private RevenueExpenditureAdapter mAdapter;
@@ -46,17 +47,21 @@ public class FragmentRevenue extends Fragment {
     }
 
     private void init() {
+        //khởi tạo recyclerview
         mRecyclerViewRevenue.setHasFixedSize(true);
         mRecyclerViewRevenue.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
+        //set adapter
         mAdapter = new RevenueExpenditureAdapter(getFragmentManager());
         new ItemTouchHelper(ItemTouchHelperSimpleCallback.simpleCallBack(FragmentRevenue.this, getString(R.string.lbl_revenue), mRevenueExpenditureViewmodel, getActivity(), mRecyclerViewRevenue)).attachToRecyclerView(mRecyclerViewRevenue);
         mRecyclerViewRevenue.setAdapter(mAdapter);
     }
 
+    //khởi tạo viewmodel
     private void intViewModel() {
         mRevenueExpenditureViewmodel = ViewModelProviders.of(getActivity()).get(RevenueExpenditureViewmodel.class);
 
+        //quan sát và lắng nghe sự thay đổi của dữ liệu
         mRevenueExpenditureViewmodel.getListRevenueExpenditure(getString(R.string.lbl_revenue)).observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
             @Override
             public void onChanged(final List<RevenueExpenditureTable> revenueExpenditureTables) {
@@ -68,6 +73,7 @@ public class FragmentRevenue extends Fragment {
 
     }
 
+    //lắng nghe sự kiện onclick view
     private void listenerOnclickedView() {
         mFabRevenue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,9 +91,11 @@ public class FragmentRevenue extends Fragment {
         });
     }
 
+    //ánh xạ view
     private void initView() {
         mFabRevenue = mView.findViewById(R.id.fab_revenue);
         mRecyclerViewRevenue = mView.findViewById(R.id.recyclerview_revenue);
     }
 
+    //Swipe to Delete RecyclerView Items
 }

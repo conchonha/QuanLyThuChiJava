@@ -50,31 +50,42 @@ public class FragmentDialogRevenueExpenditure extends DialogFragment
 
     }
 
+    /**
+     * các phương thức này trả về Dữ liệu chính Class trên -> FragmentDialogRevenueExpenditure.getInstance().setTitleCategory().setTitleDate() ...vv
+     * thuộc dạng Buider Pattern
+     */
+
+    @Override
     public FragmentDialogRevenueExpenditure setTitleCategory(int title){
         dataDisplay.setTitleCategory(title);
         return this;
     }
 
+    @Override
     public FragmentDialogRevenueExpenditure setTitleDate(int title){
         dataDisplay.setTitleDate(title);
         return this;
     }
 
+    @Override
     public FragmentDialogRevenueExpenditure setTitlePrice(int title){
         dataDisplay.setTitlePrice(title);
         return this;
     }
 
+    @Override
     public FragmentDialogRevenueExpenditure setTitleNote(int title){
         dataDisplay.setTitleNote(title);
         return this;
     }
 
+    @Override
     public FragmentDialogRevenueExpenditure setTitleSave(int title){
         dataDisplay.setTitleSave(title);
         return this;
     }
 
+    @Override
     public FragmentDialogRevenueExpenditure setTitleCancel(int title){
         dataDisplay.setTitleCancel(title);
         return this;
@@ -87,9 +98,15 @@ public class FragmentDialogRevenueExpenditure extends DialogFragment
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.setData(dataDisplay);
 
+        //khởi tạo viewmodel
         initViewModel();
+
+        //khởi tạo view
         init();
+
+        //lắng nghe sự kiện onClicked view
         listenerOnclicked();
+
         return binding.getRoot();
     }
 
@@ -232,6 +249,7 @@ public class FragmentDialogRevenueExpenditure extends DialogFragment
         return this;
     }
 
+    //show dialog lên
     public void showFragment(FragmentManager fragmentManager,String TAG){
         if(instance.isVisible()){
             dismiss();
@@ -240,6 +258,7 @@ public class FragmentDialogRevenueExpenditure extends DialogFragment
         }
     }
 
+    //getInstance() Design Pattern SingleTone
     public static FragmentDialogRevenueExpenditure getInstance(){
         if(instance == null){
             instance = new FragmentDialogRevenueExpenditure();
